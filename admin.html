@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <style>
+        /* Estilização básica e moderna para o formulário */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* Impede o usuário de selecionar textos na página */
+            user-select: none; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+<div class="container">
+    <center><img src="https://zeus-rr.github.io/osint/simbolo.ico" width="70" alt="Logo OpInfo">
+    <h2>OpInfo</h2>
+    <h2>Acessar o Sistema</h2>
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" required placeholder="Usuario">
+        </div>
+        <div class="input-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" required placeholder="Senha de Acesso">
+        </div>
+        <button type="submit" class="btn-login">Entrar</button>
+        <p id="errorMessage" class="error-message">Usuário ou senha incorretos!</p>
+    </form>
+</div>
+
+<script>
+    // 1. Lógica do Formulário de Login
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        const usuario = document.getElementById('username').value;
+        const senha = document.getElementById('password').value;
+        const msgErro = document.getElementById('errorMessage');
+
+        const usuarioCorreto = "Furnas";
+        const senhaCorreta = "2026";
+
+        if (usuario === usuarioCorreto && senha === senhaCorreta) {
+            window.location.href = "painel.html";
+        } else {
+            msgErro.style.display = "block";
+        }
+    });
+
+    // 2. BLOQUEIO DO BOTÃO DIREITO DO MOUSE
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+        alert('Ação não permitida nesta página!');
+    });
+
+    // 3. BLOQUEIO DO F12 E OUTROS ATALHOS DE INSPEÇÃO
+    document.addEventListener('keydown', function(event) {
+        // Bloqueia o F12
+        if (event.key === 'F12') {
+            event.preventDefault();
+            return false;
+        }
+
+        // Bloqueia Ctrl+Shift+I (Inspecionar), Ctrl+Shift+J (Console) e Ctrl+U (Exibir código fonte)
+        if (event.ctrlKey && (event.shiftKey && (event.key === 'I' || event.key === 'J' || event.key === 'i' || event.key === 'j') || event.key === 'U' || event.key === 'u')) {
+            event.preventDefault();
+            return false;
+        }
+    });
+</script>
+
+</body>
+</html>
